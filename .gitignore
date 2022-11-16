@@ -2,14 +2,12 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,macos,windows,eclipse
 
 ### Eclipse ###
-.metadata
 tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-.settings/
 .loadpath
 .recommenders
 
@@ -30,12 +28,6 @@ local.properties
 
 # Java annotation processor (APT)
 .factorypath
-
-# PDT-specific (PHP Development Tools)
-.buildpath
-
-# sbteclipse plugin
-.target
 
 # Tern plugin
 .tern-project
@@ -65,10 +57,6 @@ local.properties
 ### Eclipse Patch ###
 # Spring Boot Tooling
 .sts4-cache/
-
-### Java ###
-# Compiled class file
-*.class
 
 # Log file
 *.log
