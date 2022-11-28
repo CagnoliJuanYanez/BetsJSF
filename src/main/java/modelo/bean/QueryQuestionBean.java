@@ -5,22 +5,28 @@ import java.util.List;
 
 import org.primefaces.event.SelectEvent;
 
+import businessLogic.BLFacade;
+import businessLogic.BLFacadeImplementation;
+import dataAccess.DataAccess;
+import domain.Event;
+
 public class QueryQuestionBean {
-	private Date queryDate;
+	public List<Event> events;
+	private BLFacade blFacade;
 	
-	public Date getQueryDate() {
-		return queryDate;
+	public QueryQuestionBean() {
+		blFacade = new BLFacadeImplementation(new DataAccess());
 	}
 	
-	public void setQueryDate(Date aQueryDate) {
-		queryDate = aQueryDate;
+	public void query(SelectEvent event) {
+		this.events = blFacade.getEvents((Date) event.getObject());
 	}
-	
-	public void query(SelectEvent select) {
-		
+
+	public List<Event> getEvents() {
+		return events;
 	}
-	
-	public List<Object> getEvents() {
-		
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 }
