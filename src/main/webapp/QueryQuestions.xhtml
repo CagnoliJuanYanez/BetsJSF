@@ -3,17 +3,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <f:view>
 	<h:head>
 		<title>Aplicación JavaServer Faces</title>
 	</h:head>
 	<h:body>
 		<h:form>
-			<h3>
-				QUERY questions
-			</h3>
-
+			<table>
+				<tr>
+					<td>
+						<h3>Event date:</h3>
+					</td>
+					<td>
+						<p:calendar id="fecha" navigator="false" mode="inline">
+							<p:ajax event="dateSelect" listener="#{queryQuestion.query}"></p:ajax>
+						</p:calendar>
+					</td>
+				</tr>
+					<td>
+						<h3>Events:</h3>
+					</td>
+					<td>
+						<p:dataTable id="tablaEventos" selectionMode="single" border="1">
+						<p:ajax event="rowSelect"></p:ajax>
+						<f:facet name="header">Eventos:</f:facet> 
+						<p:column headerText="Event#"></p:column> 
+						<p:column headerText="Event"></p:column> 
+						</p:dataTable>
+					</td>
+				<tr>
+					<td>
+						<h3>Questions:</h3>
+					</td>
+					<td>
+						<p:dataTable id="tablaQuestions" var="item" selectionMode="single" border="1">
+						<p:ajax event="rowSelect"></p:ajax>
+						<f:facet name="header">Questions:</f:facet> 
+						<p:column headerText="Question#"></p:column> 
+						<p:column headerText="Question"></p:column> 
+						</p:dataTable>
+					</td>
+				</tr>
+			</table>
 		</h:form>
 	</h:body>
 </f:view>
