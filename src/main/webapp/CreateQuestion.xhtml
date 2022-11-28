@@ -3,14 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <f:view>
 	<h:head>
-		<title>Create Questions</title>
+		<title>Create Question</title>
 	</h:head>
 	<h:body>
-		<h3>Create Questions</h3>
+		<h3>Create Question</h3>
 
+		<h:form>
+			<table>
+				<tr>
+					<td>
+						<h3>Event date:</h3>
+					</td>
+					<td>
+						<p:calendar id="fecha" navigator="false" mode="inline">
+							<p:ajax event="dateSelect" listener="#{queryQuestion.query}"></p:ajax>
+						</p:calendar>
+					</td>
+				</tr>
+				<tr>
+					<td><h3>Event: </h3></td>
+					<td><h:selectOneMenu value="#{login.tipo}">
+					<f:selectItems value="#{login.tipos}"/>
+					</h:selectOneMenu></td>
+				</tr>
+			</table>
+		</h:form>
 	</h:body>
 </f:view>
 </html>
