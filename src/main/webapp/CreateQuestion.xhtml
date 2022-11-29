@@ -29,15 +29,31 @@
 						<h3>Events:</h3>
 					</td>
 					<td>
-						<p:dataTable id="tablaEventos" value="#{createQuestion.events}" var="event" border="1">
-						<p:ajax event="rowSelect"></p:ajax>
-						<f:facet name="header">Eventos:</f:facet> 
-						<p:column headerText="Event#">#{event.eventNumber}</p:column> 
-						<p:column headerText="Event">#{event.description}</p:column> 
+						<p:dataTable id="tablaEventos" value="#{createQuestion.events}" var="event" selectionMode="single" rowKey="#{event.eventNumber}" border="1" selection="#{createQuestion.event}">
+							<f:facet name="header">Eventos:</f:facet> 
+							<p:column headerText="Event#">#{event.eventNumber}</p:column> 
+							<p:column headerText="Event">#{event.description}</p:column> 
 						</p:dataTable>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<h3>Question:</h3>
+						<td><h:inputText id="question" value="#{createQuestion.question}"></h:inputText></td>
+					</td>
+					<td>
+						<h3>Minimum bet:</h3>
+						<td><h:inputText type="float" id="minBet" value="#{createQuestion.betMinimum}"></h:inputText></td>
+						
+					</td>
+				</tr>
 			</table>
+			<td><h:outputText value="#{createQuestion.result}"/></td>
+			<p>
+				<h:commandButton value="Create Question" update="resultMessage" action="#{createQuestion.addQuestion}"/>			</p>
+			<p>
+				<h:button value="Return" outcome="Welcome" />
+			</p>
 		</h:form>
 	</h:body>
 </f:view>
