@@ -7,10 +7,10 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:view>
 	<h:head>
-		<title>Aplicación JavaServer Faces</title>
+		<title>Query Questions</title>
 	</h:head>
 	<h:body>
-		<h:form>
+		<h:form id="queryForm">
 			<table>
 				<tr>
 					<td>
@@ -18,7 +18,7 @@
 					</td>
 					<td>
 						<p:calendar id="fecha" navigator="false" mode="inline">
-							<p:ajax event="dateSelect" listener="#{queryQuestion.query}" update="tablaEventos"></p:ajax>
+							<p:ajax event="dateSelect" listener="#{queryQuestion.queryEvents}" update="tablaEventos tablaQuestions"></p:ajax>
 						</p:calendar>
 					</td>
 				</tr>
@@ -27,11 +27,11 @@
 						<h3>Events:</h3>
 					</td>
 					<td>
-						<p:dataTable id="tablaEventos" value="#{queryQuestion.events}" var="event" border="1">
-						<p:ajax event="rowSelect"></p:ajax>
-						<f:facet name="header">Eventos:</f:facet> 
-						<p:column headerText="Event#">#{event.eventNumber}</p:column> 
-						<p:column headerText="Event">#{event.description}</p:column> 
+						<p:dataTable id="tablaEventos" value="#{queryQuestion.events}" var="event" selectionMode="single" rowKey="#{event.eventNumber}" border="1" selection="#{queryQuestion.event}">
+							<p:ajax event="rowSelect" listener="#{queryQuestion.queryQuestions}" update=":queryForm:tablaQuestions"></p:ajax>
+							<f:facet name="header">Eventos:</f:facet> 
+							<p:column headerText="Event#">#{event.eventNumber}</p:column> 
+							<p:column headerText="Event">#{event.description}</p:column> 
 						</p:dataTable>
 					</td>
 				</tr>
@@ -40,15 +40,17 @@
 						<h3>Questions:</h3>
 					</td>
 					<td>
-						<p:dataTable id="tablaQuestions" var="item" selectionMode="single" border="1">
-						<p:ajax event="rowSelect"></p:ajax>
-						<f:facet name="header">Questions:</f:facet> 
-						<p:column headerText="Question#"></p:column> 
-						<p:column headerText="Question"></p:column> 
+						<p:dataTable id="tablaQuestions" value="#{queryQuestion.questions}" var="question" border="1">
+							<f:facet name="header">Questions:</f:facet> 
+							<p:column headerText="Question#">#{question.questionNumber}</p:column> 
+							<p:column headerText="Question">#{question.question}</p:column> 
 						</p:dataTable>
 					</td>
 				</tr>
 			</table>
+			<p>
+				<h:button value="Volver a welcome" outcome="Welcome" />
+			</p>
 		</h:form>
 	</h:body>
 </f:view>

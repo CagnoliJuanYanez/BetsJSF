@@ -9,17 +9,25 @@ import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
 import dataAccess.DataAccess;
 import domain.Event;
+import domain.Question;
 
 public class QueryQuestionBean {
 	public List<Event> events;
+	public List<Question> questions;
+	public Event event;
 	private BLFacade blFacade;
 	
 	public QueryQuestionBean() {
 		blFacade = new BLFacadeImplementation(new DataAccess());
 	}
 	
-	public void query(SelectEvent event) {
+	public void queryEvents(SelectEvent event) {
 		this.events = blFacade.getEvents((Date) event.getObject());
+		this.questions = null;
+	}
+	
+	public void queryQuestions(SelectEvent selectEvent) {
+		this.questions = event.getQuestions();
 	}
 
 	public List<Event> getEvents() {
@@ -28,5 +36,21 @@ public class QueryQuestionBean {
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+	
+	public List<Question> getQuestions() {
+		return questions;
+	}
+	
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+	
+	public Event getEvent() {
+		return event;
+	}
+	
+	public void setEvent(Event ev) {
+		this.event = ev;
 	}
 }

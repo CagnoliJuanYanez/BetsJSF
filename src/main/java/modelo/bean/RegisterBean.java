@@ -3,9 +3,10 @@ package modelo.bean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class LoginBean {
+public class RegisterBean {
 	private String username;
 	private String password;
+	private String confirmPassword;
 
 	public String getUsername() {
 		return username;
@@ -23,14 +24,22 @@ public class LoginBean {
 		this.password = password;
 	}
 
-	public String logIn() {
-		if (username.equals("pirata")) {
+	public String register() {
+		if (!password.equals(confirmPassword)) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					 new FacesMessage("Error: La longitud del nombre y de la contraseña son diferentes.")); 
+					 new FacesMessage("Error: Passwords are not the same.")); 
 			return null;
 		} else {
 			return "ok";
 		}
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 }
