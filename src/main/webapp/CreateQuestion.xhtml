@@ -18,15 +18,22 @@
 					</td>
 					<td>
 						<p:calendar id="fecha" navigator="false" mode="inline">
-							<p:ajax event="dateSelect" listener="#{queryQuestion.query}"></p:ajax>
+							<p:ajax event="dateSelect" listener="#{createQuestion.query}"  update="tablaEventos"></p:ajax>
 						</p:calendar>
 					</td>
 				</tr>
 				<tr>
-					<td><h3>Event: </h3></td>
-					<td><h:selectOneMenu value="#{login.tipo}">
-					<f:selectItems value="#{login.tipos}"/>
-					</h:selectOneMenu></td>
+					<td>
+						<h3>Events:</h3>
+					</td>
+					<td>
+						<p:dataTable id="tablaEventos" value="#{createQuestion.events}" var="event" border="1">
+						<p:ajax event="rowSelect"></p:ajax>
+						<f:facet name="header">Eventos:</f:facet> 
+						<p:column headerText="Event#">#{event.eventNumber}</p:column> 
+						<p:column headerText="Event">#{event.description}</p:column> 
+						</p:dataTable>
+					</td>
 				</tr>
 			</table>
 		</h:form>
