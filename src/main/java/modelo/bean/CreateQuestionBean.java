@@ -17,7 +17,7 @@ public class CreateQuestionBean {
 	private BLFacade blFacade;
 	public Event event;
 	public String question;
-	public float betMinimum;
+	public String betMinimum;
 	public String result;
 
 
@@ -30,18 +30,27 @@ public class CreateQuestionBean {
 	}
 	
 	public void addQuestion() {
-		try {
-			blFacade.createQuestion(event, question, betMinimum);
-			this.result = "Question added successfuly!";
-		} catch (EventFinished e) {
-			System.out.print("You cannot add a question to this event, this event has already finished.");
-			this.result = "You cannot add a question to this event, this event has already finished.";
-		} catch (QuestionAlreadyExist e) {
-			System.out.print("You cannot add this question to this event, this question already exists.");
-			this.result = "You cannot add this question to this event, this question already exists.";
-		} catch (Exception e) {
-			System.out.print("Error has ocurred:" + e.getMessage());
-			this.result = "Error has ocurred:" + e.getMessage();
+		float minimum;
+		if (event == null || betMinimum.isEmpty() || question.isEmpty()) {
+			this.result  = "Something is missing. You should select an event, indicate question and a minimum bet.";
+		} else {
+			try {
+				minimum = Float.parseFloat(betMinimum); 
+				blFacade.createQuestion(event, question, minimum);
+				this.result = "Question added successfuly!";
+			} catch (EventFinished e) {
+				System.out.print("You cannot add a question to this event, this event has already finished.");
+				this.result = "You cannot add a question to this event, this event has already finished.";
+			} catch (QuestionAlreadyExist e) {
+				System.out.print("You cannot add this question to this event, this question already exists.");
+				this.result = "You cannot add this question to this event, this question already exists.";
+			} catch (NumberFormatException e) {
+				System.out.print("Minimum bet should be numerical.");
+				this.result = "Minimum bet should be numerical.";
+			} catch (Exception e) {
+				System.out.print("Error has ocurred:" + e.getMessage());
+				this.result = "Error has ocurred:" + e.getMessage();
+			}
 		}
 	}
 
@@ -69,11 +78,11 @@ public class CreateQuestionBean {
 		this.question = q;
 	}
 	
-	public float getBetMinimum() {
+	public String getBetMinimum() {
 		return betMinimum;
 	}
 	
-	public void setBetMinimum(float bm) {
+	public void setBetMinimum(String bm) {
 		this.betMinimum = bm;
 	}
 	
