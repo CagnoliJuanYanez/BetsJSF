@@ -7,7 +7,7 @@ import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
-import dataAccess.DataAccess;
+import dataAccess.DataAccessHibernate;
 import domain.Event;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -22,7 +22,7 @@ public class CreateQuestionBean {
 
 
 	public CreateQuestionBean() {
-		blFacade = new BLFacadeImplementation(new DataAccess());
+		blFacade = new BLFacadeImplementation(new DataAccessHibernate());
 	}
 	
 	public void query(SelectEvent event) {
