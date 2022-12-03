@@ -9,10 +9,12 @@ public class Question {
 	@Id 
 	@GeneratedValue
 	private Integer questionNumber;
+	
 	private String question; 
 	private float betMinimum;
 	private String result;  
 	
+	@ManyToOne
 	private Event event;
 
 	public Question(){

@@ -3,7 +3,9 @@ package dataAccess;
 public class prueba {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		DataAccessHibernate a = new DataAccessHibernate();
+		a.initializeDB();
+		
 
 	}
 

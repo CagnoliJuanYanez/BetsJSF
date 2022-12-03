@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
 
 import org.hibernate.Session;
 
@@ -151,16 +150,16 @@ public class DataAccessHibernate implements DataAccessInterface {
 	}
 
 	@Override
-	public Vector<Event> getEvents(Date date) {
+	public List<Event> getEvents(Date date) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List result = session.createQuery("from Event").list();
 		session.getTransaction().commit();
-		return (Vector<Event>) result;
+		return result;
 	}
 
 	@Override
-	public Vector<Date> getEventsMonth(Date date) {
+	public List<Date> getEventsMonth(Date date) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import javax.persistence.Entity;
@@ -14,18 +15,20 @@ public class Event {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private Integer eventNumber;
 	private String description; 
 	private Date eventDate;
+	
 	@OneToMany
-	private Vector<Question> questions=new Vector<Question>();
+	private List<Question> questions=new Vector<Question>();
 
-	public Vector<Question> getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(Vector<Question> questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
