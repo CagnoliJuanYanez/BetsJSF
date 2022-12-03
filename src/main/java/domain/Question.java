@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name="questions")
 public class Question {
 	
 	@Id 
@@ -14,7 +15,7 @@ public class Question {
 	private float betMinimum;
 	private String result;  
 	
-	@ManyToOne
+	@Transient
 	private Event event;
 
 	public Question(){

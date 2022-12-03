@@ -7,8 +7,10 @@ import java.util.Vector;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="events")
 public class Event {
 	
 	/**
