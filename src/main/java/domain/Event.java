@@ -5,9 +5,14 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="events")
@@ -21,9 +26,11 @@ public class Event {
 	@Id
 	private Integer eventNumber;
 	private String description; 
+	
+	@Type(type="date")
 	private Date eventDate;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Question> questions=new Vector<Question>();
 
 	public List<Question> getQuestions() {

@@ -1,11 +1,18 @@
 package dataAccess;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.persistence.TemporalType;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.type.DateType;
+import org.hibernate.type.TimestampType;
 
 import domain.Event;
 import domain.Question;
@@ -153,7 +160,11 @@ public class DataAccessHibernate implements DataAccessInterface {
 	public List<Event> getEvents(Date date) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		List result = session.createQuery("from Event").list();
+		
+		
+		Query eventsQuery = session.createQuery("SELECT e from Event e WHERE e.eventDate=:paramDate");
+		eventsQuery.setDate("paramDate", date);
+		List result = eventsQuery.list();
 		session.getTransaction().commit();
 		return result;
 	}
