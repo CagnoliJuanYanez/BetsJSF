@@ -6,11 +6,13 @@ import java.util.List;
 import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
-import businessLogic.BLFacadeImplementation;
-import dataAccess.DataAccessHibernate;
 import domain.Event;
+import domain.Question;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
+import businessLogic.BLFacadeImplementation;
+import dataAccess.DataAccessHibernate;
+
 
 public class CreateQuestionBean {
 	public List<Event> events;
