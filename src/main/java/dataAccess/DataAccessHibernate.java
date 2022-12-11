@@ -152,7 +152,16 @@ public class DataAccessHibernate implements DataAccessInterface {
 
 	@Override
 	public Question createQuestion(Event event, String question, float betMinimum) throws QuestionAlreadyExist {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Question newQ = new Question(question, betMinimum, event);
+		session.save(newQ);
+		
+		event.getQuestions().add(newQ);
+		session.saveOrUpdate(event);
+		
+		session.getTransaction().commit();
 		return null;
 	}
 
