@@ -16,6 +16,7 @@ import org.hibernate.type.TimestampType;
 
 import domain.Event;
 import domain.Question;
+import domain.User;
 import domain.UtilDate;
 import exceptions.QuestionAlreadyExist;
 import modelo.HibernateUtil;
@@ -167,6 +168,47 @@ public class DataAccessHibernate implements DataAccessInterface {
 		List result = eventsQuery.list();
 		session.getTransaction().commit();
 		return result;
+	}
+	
+	@Override
+	public User getUser(String username, String password) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		
+		Query userQuery = session.createQuery("SELECT u from User u WHERE u.username=:username AND u.password=:password");
+		userQuery.setString("password", password);
+		userQuery.setString("username", username);
+		User result = (User) userQuery.uniqueResult();
+		session.getTransaction().commit();
+		
+		
+		return result;
+	}
+	
+	@Override
+	public Boolean usernameExists(String username) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+		session.beginTransaction();
+				
+		Query userQuery = session.createQuery("SELECT u from User u WHERE u.username=:username");
+		userQuery.setString("username", username);
+		User result = (User) userQuery.uniqueResult();
+		session.getTransaction().commit();		
+		
+		
+		if (result != null) return true;
+		
+		return false;
+	}
+	
+	@Override
+	public void saveUser(User u) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();		
+		session.persist(u);
+		session.getTransaction().commit();
 	}
 
 	@Override

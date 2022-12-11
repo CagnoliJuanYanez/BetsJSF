@@ -3,9 +3,21 @@ package modelo.bean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import businessLogic.BLFacade;
+import businessLogic.BLFacadeImplementation;
+import dataAccess.DataAccessHibernate;
+import domain.User;
+import exceptions.InvalidCredentials;
+import exceptions.UsernameAlreadyExists;
+
 public class LoginBean {
 	private String username;
 	private String password;
+	private BLFacade blFacade;
+
+	public LoginBean() {
+		blFacade = new BLFacadeImplementation(new DataAccessHibernate());
+	}
 
 	public String getUsername() {
 		return username;
@@ -24,13 +36,15 @@ public class LoginBean {
 	}
 
 	public String logIn() {
-		if (username.equals("pirata")) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					 new FacesMessage("Error: La longitud del nombre y de la contraseña son diferentes.")); 
-			return null;
-		} else {
+		try {
+			User u = blFacade.login(username, password);
 			return "ok";
+		} catch (InvalidCredentials e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Error: Incorrect username or password. Please try again."));
+			return null;
 		}
+
 	}
 
 }

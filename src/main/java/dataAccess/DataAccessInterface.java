@@ -5,6 +5,7 @@ import java.util.List;
 
 import domain.Event;
 import domain.Question;
+import domain.User;
 import exceptions.QuestionAlreadyExist;
 
 public interface DataAccessInterface {
@@ -60,6 +61,10 @@ public interface DataAccessInterface {
 	 */
 	List<Date> getEventsMonth(Date date);
 
+	
+	User getUser(String username, String Password);
+	Boolean usernameExists(String username);
+	void saveUser(User user);
 	
 	/**
 	 * This method checks if the question has been previously added to the event 

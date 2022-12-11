@@ -1,11 +1,13 @@
 @charset "ISO-8859-1";
 
 body {
-	background-color: lightblue;
+	background-color: lightblue; 
+	display: flex;
+  	justify-content: center;
+  	text-align: center;
 }
 
 h3 {
-	color: red;
 	text-align: center;
 }
 

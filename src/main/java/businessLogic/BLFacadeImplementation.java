@@ -7,9 +7,12 @@ import java.util.Vector;
 
 import dataAccess.DataAccessInterface;
 import domain.Question;
+import domain.User;
 import domain.Event;
 import exceptions.EventFinished;
+import exceptions.InvalidCredentials;
 import exceptions.QuestionAlreadyExist;
+import exceptions.UsernameAlreadyExists;
 
 /**
  * It implements the business logic as a web service.
@@ -111,6 +114,24 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.initializeDB();
 		dbManager.close();
 	}
+	 
+	 public void registerUser(String username, String password) throws UsernameAlreadyExists {
+		 dbManager.open();
+		 if (dbManager.usernameExists(username)) throw new UsernameAlreadyExists("This username is taken.");
+		 
+		 User user = new User(username,password);
+		 dbManager.saveUser(user);
+		 dbManager.close();
+	 }
+	 
+	 public User login(String username, String password) throws InvalidCredentials {
+		 dbManager.open();
+		 
+		 User user = dbManager.getUser(username, password);
+		 if(user == null) throw new InvalidCredentials("The username or password is incorrect.");
+		 dbManager.close();
+		 return user;
+	 }
 
 }
 

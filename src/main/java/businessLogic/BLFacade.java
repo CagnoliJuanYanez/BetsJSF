@@ -5,9 +5,12 @@ import java.util.List;
 
 //import domain.Booking;
 import domain.Question;
+import domain.User;
 import domain.Event;
 import exceptions.EventFinished;
+import exceptions.InvalidCredentials;
 import exceptions.QuestionAlreadyExist;
+import exceptions.UsernameAlreadyExists;
 
 /**
  * Interface that specifies the business logic.
@@ -44,6 +47,11 @@ public interface BLFacade  {
 	 */
 	 public List<Date> getEventsMonth(Date date);
 	
+	 public void registerUser(String username, String password) throws UsernameAlreadyExists;
+	 public User login(String username, String password) throws InvalidCredentials;
+
+	 
+	 
 	/**
 	 * This method calls the data access to initialize the database with some events and questions.
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
