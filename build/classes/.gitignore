@@ -1,1 +1,6 @@
+/businessLogic/
+/dataAccess/
+/domain/
+/exceptions/
+/hibernate.cfg.xml
 /modelo/
