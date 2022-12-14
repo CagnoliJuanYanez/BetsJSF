@@ -40,7 +40,6 @@ public class DataAccessHibernate implements DataAccessInterface {
 	@Override
 	public void emptyDatabase() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

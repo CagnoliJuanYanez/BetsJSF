@@ -9,6 +9,7 @@ import dataAccess.DataAccessHibernate;
 import domain.User;
 import exceptions.InvalidCredentials;
 import exceptions.UsernameAlreadyExists;
+import dataAccess.DataAccessHibernate;
 
 public class LoginBean {
 	private String username;
@@ -46,5 +47,8 @@ public class LoginBean {
 		}
 
 	}
-
+	
+	public void initializeDb() {
+		new DataAccessHibernate().initializeDB();
+	}
 }
