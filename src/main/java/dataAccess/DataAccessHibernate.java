@@ -2,8 +2,10 @@ package dataAccess;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -177,6 +179,29 @@ public class DataAccessHibernate implements DataAccessInterface {
 		List result = eventsQuery.list();
 		session.getTransaction().commit();
 		return result;
+	}
+	
+	@Override
+	public List<Question> getQuestions(Date date) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		
+		Query eventsQuery = session.createQuery("SELECT e from Event e WHERE e.eventDate=:paramDate");
+		eventsQuery.setDate("paramDate", date);
+		List events =  eventsQuery.list();
+		
+		List questions = new ArrayList();
+		for (Object objEvent : events) {
+			Query questionsQuery = session.createQuery("SELECT q from Question q INNER JOIN events_questions e on q.questionNumber = e.questions_questionNumber WHERE e.events_eventsnumber=:eventNumber");
+			Event event = (Event) objEvent;
+			eventsQuery.setInteger("eventNumber", event.getEventNumber());
+			questions.addAll(questionsQuery.list());
+		}
+			
+		
+		session.getTransaction().commit();
+		return questions;
 	}
 	
 	@Override

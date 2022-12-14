@@ -78,6 +78,14 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.close();
 		return events;
 	}
+	
+	public List<Question> getQuestions(Date date)  {
+		dbManager.open();
+		List<Question>  questions=dbManager.getQuestions(date);
+		dbManager.close();
+		return questions;
+	}
+
 
     
 	/**

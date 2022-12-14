@@ -51,6 +51,8 @@ public interface BLFacade  {
 	 public User login(String username, String password) throws InvalidCredentials;
 
 	 
+	 public List<Question> getQuestions(Date date);
+
 	 
 	/**
 	 * This method calls the data access to initialize the database with some events and questions.

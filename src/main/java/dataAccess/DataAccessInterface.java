@@ -52,6 +52,7 @@ public interface DataAccessInterface {
 	 * @return collection of events
 	 */
 	List<Event> getEvents(Date date);
+	List<Question> getQuestions(Date date);
 
 	/**
 	 * This method retrieves from the database the dates a month for which there are events
