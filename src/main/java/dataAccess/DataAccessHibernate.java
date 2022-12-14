@@ -192,10 +192,8 @@ public class DataAccessHibernate implements DataAccessInterface {
 		
 		List questions = new ArrayList();
 		for (Object objEvent : events) {
-			Query questionsQuery = session.createQuery("SELECT q from Question q INNER JOIN events_questions e on q.questionNumber = e.questions_questionNumber WHERE e.events_eventsnumber=:eventNumber");
 			Event event = (Event) objEvent;
-			eventsQuery.setInteger("eventNumber", event.getEventNumber());
-			questions.addAll(questionsQuery.list());
+			questions.addAll(event.getQuestions());
 		}
 			
 		

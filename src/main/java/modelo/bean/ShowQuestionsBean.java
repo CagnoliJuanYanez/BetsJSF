@@ -22,6 +22,11 @@ public class ShowQuestionsBean {
 	
 	public void queryQuestions(SelectEvent event) {
 		this.questions = blFacade.getQuestions((Date) event.getObject());
+		if (this.questions.size()>0) {
+			System.out.println(questions);
+		}else {
+			System.out.println(blFacade.getEvents((Date) event.getObject()));
+		}
 	}
 
 	public List<Question> getQuestions() {
